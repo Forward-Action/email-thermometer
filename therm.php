@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Europe/London');
+
 header("Content-Type: image/png");
 
 $url = isset($_GET['geturl']) ? $_GET['geturl'] : 'https://secure.greenpeace.org.uk/page/contribute_c/joe-test-string/xml'; // xml link
