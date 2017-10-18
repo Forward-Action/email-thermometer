@@ -8,7 +8,7 @@ https://www.lewj.ninja/prog/therm.php?contributed=21321312&goal=52000000&contrib
 ### Data Queries
 
 `?datestr=`  
-**Type:** Unix Timestamp (eg. `1508168978`)  
+**Type:** Unix Timestamp (eg. `1508168978`)
 **Desc:** Controls the "as of" part
 
 `?contributed=`  
@@ -27,21 +27,50 @@ https://www.lewj.ninja/prog/therm.php?contributed=21321312&goal=52000000&contrib
 
 `?showperc=`  
 **Type:** Boolean (eg. `true`)  
-**Type:** `true`  
+**Default:** `true`  
 **Desc:** Shows the percentage number on the progress bar
 
 `?showdate=`  
 **Type:** Boolean (eg. `true`)  
-**Type:** `true`  
+**Default:** `true`  
 **Desc:** Shows the date on the bottom right
 
 `?showcontributions=`  
 **Type:** Boolean (eg. `true`)  
-**Type:** `true`  
+**Default:** `true`  
 **Desc:** Shows the amount of contributions on the bottom left
 
 `?halfsize=`  
 **Type:** Boolean (eg. `true`)  
-**Type:** `false`  
+**Default:** `false`  
 **Desc:** Reduces the height of the image to 150px, rather than 200px.  
 _Note: only use this if you have `showperc`, `showdate` and `showcontributions` set to false_
+
+`?transbg=`  
+**Type:** Boolean (eg. `true`)  
+**Default:** `true`  
+**Desc:** Sets whether you want a transparent background  
+_Note: if you use this make sure you set the bgcolour_
+
+### Colour Queries
+
+`?textcolour=`  
+**Type:** Hex Colour (eg. `ff0000`)  
+**Default:** `1412cf`  
+**Desc:** Sets colour of the contributions/goal text
+
+`?barcolour=`  
+**Type:** Hex Colour (eg. `ff0000`)  
+**Default:** `4bcc67`  
+**Desc:** Sets colour of the thermometer bar
+
+`?labelcolour=`  
+**Type:** Hex Colour (eg. `ff0000`)  
+**Default:** `464646`  
+**Desc:** Sets colour of the labels
+
+`?bgcolour=`  
+**Type:** Hex Colour (eg. `ff0000`)  
+**Default:** `ffffff`  
+**Desc:** Sets colour of the background
+_Note: to use this set transbg to false_
