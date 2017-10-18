@@ -7,6 +7,10 @@ https://www.lewj.ninja/prog/therm.php?contributed=21321312&goal=52000000&contrib
 
 ### Data Queries
 
+`?geturl=`  
+**Type:** URL
+**Desc:** Links to a correctly formatted XML document with the data source, it will fetch the data from this
+
 `?datestr=`  
 **Type:** Unix Timestamp (eg. `1508168978`)
 **Desc:** Controls the "as of" part

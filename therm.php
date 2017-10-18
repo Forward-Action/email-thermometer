@@ -1,6 +1,16 @@
 <?php
 header("Content-Type: image/png");
 
+$url = isset($_GET['geturl']) ? $_GET['geturl'] : 'https://secure.greenpeace.org.uk/page/contribute_c/joe-test-string/xml'; // xml link
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_URL, $url);    // get the url contents
+
+$data = curl_exec($ch); // execute curl request
+curl_close($ch);
+
+$xml = simplexml_load_string($data);
+
 function convertToRGB($hex)
 {
     $newRGB = array();
@@ -13,11 +23,11 @@ function convertToRGB($hex)
 }
 
 // Set data variables
-$t = isset($_GET['datestr']) ? $_GET['datestr'] : 1508168978; // as if it were an api call
+$t = isset($_GET['datestr']) ? $_GET['datestr'] : time(); // as if it were an api call
 $date_src = date("M jS", $t).' at '.date("g:ia", $t);
-$contributed_src = isset($_GET['contributed']) ? $_GET['contributed'] : 37820504;
-$goal_src = isset($_GET['goal']) ? $_GET['goal'] : 49000000;
-$contributions_src = isset($_GET['contributions']) ? $_GET['contributions'] : 1248258;
+$contributed_src = isset($_GET['contributed']) ? $_GET['contributed'] : floatval($xml->campaign['amount']);
+$goal_src = isset($_GET['goal']) ? $_GET['goal'] : floatval($xml->campaign['goal']);
+$contributions_src = isset($_GET['contributions']) ? $_GET['contributions'] : round($xml->campaign['contributions']);
 
 // Display vars
 $show_center_perc = isset($_GET['showperc']) ? $_GET['showperc'] : 'true';
@@ -69,7 +79,7 @@ $bar = imagecolorallocatealpha($image, $barSrc[0], $barSrc[1], $barSrc[2], 0);
 $contributed_label = 'CONTRIBUTED';
 imagettftext($image, 13, 0, 15, 28, $label, $font_semi, $contributed_label);
 // Contributed value text
-$contributed = '£'.number_format($contributed_src);
+$contributed = str_replace(".00", "", '£'.number_format($contributed_src, 2));
 imagettftext($image, 22, 0, 15, 55, $primary, $font_bold, $contributed);
 
 // Goal label
@@ -79,7 +89,7 @@ $textWidth4 = abs($dimensions4[4] - $dimensions4[0]);
 $x4 = imagesx($image) - $textWidth4;
 imagettftext($image, 13, 0, ($x4 - 17), 28, $label, $font_semi, $goal_label);
 // Right aligned goal value text
-$goal = '£'.number_format($goal_src);
+$goal = str_replace(".00", "", '£'.number_format($goal_src, 2));
 $dimensions = imagettfbbox(22, 0, $font_bold, $goal);
 $textWidth = abs($dimensions[4] - $dimensions[0]);
 $x = imagesx($image) - $textWidth;
@@ -127,14 +137,20 @@ imagecopy($image, $textTemp, 0, 0, 0, 0, 620, 200);
 
 // 17 602
 // This is the progress bar
-$bar_width = round(($contributed_src * (602-17)) / $goal_src) + 17;
+if ($perc_calc>=100) {
+    $bar_width = 602;
+} else {
+    $bar_width = round(($contributed_src * (602-17)) / $goal_src) + 17;
+}
 imagefilledrectangle($image, 17, 78, $bar_width, 105, $bar);
 
 // Centered percent display on the progress bar
 if ($show_center_perc==='true') {
-    $perc = $perc_calc.'%';
-    $x3 = (imagesx($image) / 2);
-    imagettftext($image, 14, 0, ($x3 - 17), 98.5, $label, $font_semi, $perc);
+    $perc = number_format($perc_calc).'%';
+    $dimensions3 = imagettfbbox(14, 0, $font_semi, $perc);
+    $textWidth3 = abs($dimensions3[4] - $dimensions3[0]);
+    $x3 = ceil((imagesx($image) - $textWidth3) / 2);
+    imagettftext($image, 14, 0, $x3, 98.5, $label, $font_semi, $perc);
 }
 
 imagepng($image);
