@@ -63,10 +63,11 @@ if ($transBG==='true') {
 imagealphablending($image, true);
 imagesavealpha($image, true);
 
+putenv('GDFONTPATH=' . realpath('.'));
 // Set vars for fonts and colours
-$font_normal = 'OpenSans-Regular.ttf';
-$font_semi = 'OpenSans-Semibold.ttf';
-$font_bold = 'OpenSans-Bold.ttf';
+$font_normal = 'OpenSans-Regular';
+$font_semi = 'OpenSans-Semibold';
+$font_bold = 'OpenSans-Bold';
 
 $primSrc = convertToRGB($textColour);
 $primary = imagecolorallocatealpha($image, $primSrc[0], $primSrc[1], $primSrc[2], 0);
