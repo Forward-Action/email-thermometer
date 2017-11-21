@@ -1,0 +1,13 @@
+runtime: php55
+api_version: '1.0'
+env: standard
+instance_class: F1
+runtime_config:
+  document_root: .
+handlers:
+- url: /*
+  script: therm.php
+- url: /therm
+  script: therm.php
+- url: /petition
+  script: petition.php

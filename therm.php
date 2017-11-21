@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set('Europe/London');
-
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 header("Content-Type: image/png");
 
 $url = isset($_GET['geturl']) ? $_GET['geturl'] : 'https://secure.greenpeace.org.uk/page/contribute_c/joe-test-string/xml'; // xml link
@@ -63,11 +64,17 @@ if ($transBG==='true') {
 imagealphablending($image, true);
 imagesavealpha($image, true);
 
+/*
 putenv('GDFONTPATH=' . realpath('.'));
 // Set vars for fonts and colours
 $font_normal = 'OpenSans-Regular';
 $font_semi = 'OpenSans-Semibold';
 $font_bold = 'OpenSans-Bold';
+*/
+
+$font_normal = 'fonts/OpenSans-Regular.ttf';
+$font_semi = 'fonts/OpenSans-Semibold.ttf';
+$font_bold = 'fonts/OpenSans-Bold.ttf';
 
 $primSrc = convertToRGB($textColour);
 $primary = imagecolorallocatealpha($image, $primSrc[0], $primSrc[1], $primSrc[2], 0);
