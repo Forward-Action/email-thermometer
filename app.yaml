@@ -11,3 +11,5 @@ handlers:
   script: therm.php
 - url: /petition
   script: petition.php
+- url: /monthly
+  script: monthly.php
