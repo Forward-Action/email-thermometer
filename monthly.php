@@ -57,7 +57,7 @@ if (isset($_GET['currency'])) {
 $show_center_perc = isset($_GET['showperc']) ? $_GET['showperc'] : 'true';
 $show_date = isset($_GET['showdate']) ? $_GET['showdate'] : 'true';
 $show_contributions = isset($_GET['showcontributions']) ? $_GET['showcontributions'] : 'true';
-$half_size = isset($_GET['halfsize']) ? $_GET['halfsize'] : 'false';
+$half_size = isset($_GET['halfsize']) ? $_GET['halfsize'] : 'true'; // default true for this version
 $transBG = isset($_GET['transbg']) ? $_GET['transbg'] : 'true';
 
 // Colour vars
@@ -107,13 +107,13 @@ $barSrc = convertToRGB($barColour);
 $bar = imagecolorallocatealpha($image, $barSrc[0], $barSrc[1], $barSrc[2], 0);
 
 // Contributed label
-$contributed_label = 'CONTRIBUTED';
+$contributed_label = 'CONTRIBUTORS';
 imagettftext($image, 13, 0, 15, 28, $label, $font_semi, $contributed_label);
 // Contributed value text
 if ($currency == '€') {
-    $contributed = str_replace(",00", "", number_format($contributed_src, 2, ',', '.').' '.$currency);
+    $contributed = str_replace(",00", "", number_format($contributed_src, 2, ',', '.'));
 } else {
-    $contributed = str_replace(".00", "", $currency.number_format($contributed_src, 2));   
+    $contributed = str_replace(".00", "", number_format($contributed_src, 2));   
 }
 imagettftext($image, 22, 0, 15, 60, $primary, $font_bold, $contributed);
 
@@ -125,9 +125,9 @@ $x4 = imagesx($image) - $textWidth4;
 imagettftext($image, 13, 0, ($x4 - 17), 28, $label, $font_semi, $goal_label);
 // Right aligned goal value text
 if ($currency == '€') {
-    $goal = str_replace(",00", "", number_format($goal_src, 2, ',', '.').' '.$currency);
+    $goal = str_replace(",00", "", number_format($goal_src, 2, ',', '.'));
 } else {
-    $goal = str_replace(".00", "", $currency.number_format($goal_src, 2));
+    $goal = str_replace(".00", "", number_format($goal_src, 2));
 }
 $dimensions = imagettfbbox(22, 0, $font_bold, $goal);
 $textWidth = abs($dimensions[4] - $dimensions[0]);
