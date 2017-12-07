@@ -37,7 +37,7 @@ if (isset($_GET['currency'])) {
         case 'GBP':
             $currency = '£';
             break;
-        case 'EUR': 
+        case 'EUR':
             $currency = '€';
             break;
         case 'USD':
@@ -57,6 +57,7 @@ if (isset($_GET['currency'])) {
 $show_center_perc = isset($_GET['showperc']) ? $_GET['showperc'] : 'true';
 $show_date = isset($_GET['showdate']) ? $_GET['showdate'] : 'true';
 $show_contributions = isset($_GET['showcontributions']) ? $_GET['showcontributions'] : 'true';
+$show_contributed = isset($_GET['showcontributed']) ? $_GET['showcontributed'] : 'true';
 $half_size = isset($_GET['halfsize']) ? $_GET['halfsize'] : 'false';
 $transBG = isset($_GET['transbg']) ? $_GET['transbg'] : 'true';
 
@@ -107,15 +108,17 @@ $barSrc = convertToRGB($barColour);
 $bar = imagecolorallocatealpha($image, $barSrc[0], $barSrc[1], $barSrc[2], 0);
 
 // Contributed label
-$contributed_label = 'CONTRIBUTED';
-imagettftext($image, 13, 0, 15, 28, $label, $font_semi, $contributed_label);
-// Contributed value text
-if ($currency == '€') {
-    $contributed = str_replace(",00", "", number_format($contributed_src, 2, ',', '.').' '.$currency);
-} else {
-    $contributed = str_replace(".00", "", $currency.number_format($contributed_src, 2));   
+if ($show_contributed==='true') {
+    $contributed_label = 'CONTRIBUTED';
+    imagettftext($image, 13, 0, 15, 28, $label, $font_semi, $contributed_label);
+    // Contributed value text
+    if ($currency == '€') {
+        $contributed = str_replace(",00", "", number_format($contributed_src, 2, ',', '.').' '.$currency);
+    } else {
+        $contributed = str_replace(".00", "", $currency.number_format($contributed_src, 2));
+    }
+    imagettftext($image, 22, 0, 15, 60, $primary, $font_bold, $contributed);
 }
-imagettftext($image, 22, 0, 15, 60, $primary, $font_bold, $contributed);
 
 // Goal label
 $goal_label = 'GOAL';

@@ -1,6 +1,7 @@
 <?php
 date_default_timezone_set('Europe/London');
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 header("Content-Type: image/png");
 
 $url = isset($_GET['geturl']) ? $_GET['geturl'] : 'https://secure.greenpeace.org.uk/page/contribute_c/joe-test-string/xml'; // xml link
@@ -35,6 +36,7 @@ $contributions_src = isset($_GET['contributions']) ? $_GET['contributions'] : ro
 $show_center_perc = isset($_GET['showperc']) ? $_GET['showperc'] : 'true';
 $show_date = isset($_GET['showdate']) ? $_GET['showdate'] : 'true';
 $show_contributions = isset($_GET['showcontributions']) ? $_GET['showcontributions'] : 'true';
+$show_signatures = isset($_GET['showsignatures']) ? $_GET['showsignatures'] : 'true';
 $half_size = isset($_GET['halfsize']) ? $_GET['halfsize'] : 'false';
 $transBG = isset($_GET['transbg']) ? $_GET['transbg'] : 'true';
 
@@ -65,9 +67,9 @@ imagesavealpha($image, true);
 
 putenv('GDFONTPATH=' . realpath('.'));
 // Set vars for fonts and colours
-$font_normal = 'OpenSans-Regular';
-$font_semi = 'OpenSans-Semibold';
-$font_bold = 'OpenSans-Bold';
+$font_normal = 'fonts/OpenSans-Regular.ttf';
+$font_semi = 'fonts/OpenSans-Semibold.ttf';
+$font_bold = 'fonts/OpenSans-Bold.ttf';
 
 $primSrc = convertToRGB($textColour);
 $primary = imagecolorallocatealpha($image, $primSrc[0], $primSrc[1], $primSrc[2], 0);
@@ -78,12 +80,14 @@ $label = imagecolorallocatealpha($image, $labelSrc[0], $labelSrc[1], $labelSrc[2
 $barSrc = convertToRGB($barColour);
 $bar = imagecolorallocatealpha($image, $barSrc[0], $barSrc[1], $barSrc[2], 0);
 
-// Contributed label
-$contributed_label = 'SIGNATURES';
-imagettftext($image, 13, 0, 15, 28, $label, $font_semi, $contributed_label);
-// Contributed value text
-$contributed = str_replace(".00", "", ''.number_format($contributed_src, 2));
-imagettftext($image, 22, 0, 15, 55, $primary, $font_bold, $contributed);
+// SIGNATURES label
+if ($show_signatures==='true') {
+    $contributed_label = 'SIGNATURES';
+    imagettftext($image, 13, 0, 15, 28, $label, $font_semi, $contributed_label);
+    // Contributed value text
+    $contributed = str_replace(".00", "", ''.number_format($contributed_src, 2));
+    imagettftext($image, 22, 0, 15, 55, $primary, $font_bold, $contributed);
+}
 
 // Goal label
 $goal_label = 'GOAL';
