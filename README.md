@@ -56,6 +56,24 @@ _Note: only use this if you have `showperc`, `showdate` and `showcontributions` 
 **Desc:** Sets whether you want a transparent background  
 _Note: if you use this make sure you set the bgcolour_
 
+`?showsignatures=`  
+**Type:** Boolean (eg. `true`)  
+**Default:** `true`  
+**Desc:** Sets whether you want to display signatures on petition.php
+_Note: only works on petition.php_
+
+`?showcontributors=`  
+**Type:** Boolean (eg. `true`)  
+**Default:** `true`  
+**Desc:** Sets whether you want to display contributors on monthly.php
+_Note: only works on monthly.php_
+
+`?showcontributed=`  
+**Type:** Boolean (eg. `true`)  
+**Default:** `true`  
+**Desc:** Sets whether you want to display contributed on therm.php
+_Note: only works on therm.php_
+
 ### Colour Queries
 
 `?textcolour=`  
