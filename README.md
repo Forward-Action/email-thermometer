@@ -74,6 +74,11 @@ _Note: only works on monthly.php_
 **Desc:** Sets whether you want to display contributed on therm.php
 _Note: only works on therm.php_
 
+`?currency=`  
+**Type:** Currency code  
+**Default:** `GBP`  
+**Desc:** Set it as GBP, EUR, USD, AUD, CAD
+
 ### Colour Queries
 
 `?textcolour=`  
