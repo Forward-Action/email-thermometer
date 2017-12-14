@@ -31,6 +31,9 @@ $contributed_src = isset($_GET['contributed']) ? $_GET['contributed'] : floatval
 $goal_src = isset($_GET['goal']) ? $_GET['goal'] : floatval($xml->campaign['goal']);
 $contributions_src = isset($_GET['contributions']) ? $_GET['contributions'] : round($xml->campaign['contributions']);
 
+$top_left_tag = isset($_GET['top_left']) ? $_GET['top_left'] : 'CONTRIBUTORS';
+$top_right_tag = isset($_GET['top_right']) ? $_GET['top_right'] : 'GOAL';
+
 //currency
 if (isset($_GET['currency'])) {
     switch ($_GET['currency']) {
@@ -109,7 +112,7 @@ $bar = imagecolorallocatealpha($image, $barSrc[0], $barSrc[1], $barSrc[2], 0);
 
 if ($show_contributors==='true') {
     // Contributed label
-    $contributed_label = 'CONTRIBUTORS';
+    $contributed_label = $top_left_tag;
     imagettftext($image, 13, 0, 15, 28, $label, $font_semi, $contributed_label);
     // Contributed value text
     if ($currency == '€') {
@@ -121,7 +124,7 @@ if ($show_contributors==='true') {
 }
 
 // Goal label
-$goal_label = 'GOAL';
+$goal_label = $top_right_tag;
 $dimensions4 = imagettfbbox(13, 0, $font_semi, $goal_label);
 $textWidth4 = abs($dimensions4[4] - $dimensions4[0]);
 $x4 = imagesx($image) - $textWidth4;

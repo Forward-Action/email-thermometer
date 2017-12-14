@@ -46,6 +46,11 @@ $barColour = isset($_GET['barcolour']) ? $_GET['barcolour'] : '4bcc67';
 $labelColour = isset($_GET['labelcolour']) ? $_GET['labelcolour'] : '464646';
 $bgColour = isset($_GET['bgcolour']) ? $_GET['bgcolour'] : 'ffffff';
 
+// Labels
+$top_left_tag = isset($_GET['top_left']) ? $_GET['top_left'] : 'SIGNATURES';
+$top_right_tag = isset($_GET['top_right']) ? $_GET['top_right'] : 'GOAL';
+$bottom_left_tag = isset($_GET['bottom_left']) ? $_GET['bottom_left'] : 'SIGNATURES';
+
 $perc_calc = round(($contributed_src / $goal_src) * 100);
 
 // create image and set background to transparent
@@ -82,7 +87,7 @@ $bar = imagecolorallocatealpha($image, $barSrc[0], $barSrc[1], $barSrc[2], 0);
 
 // SIGNATURES label
 if ($show_signatures==='true') {
-    $contributed_label = 'SIGNATURES';
+    $contributed_label = $top_left_tag;
     imagettftext($image, 13, 0, 15, 28, $label, $font_semi, $contributed_label);
     // Contributed value text
     $contributed = str_replace(".00", "", ''.number_format($contributed_src, 2));
@@ -90,7 +95,7 @@ if ($show_signatures==='true') {
 }
 
 // Goal label
-$goal_label = 'GOAL';
+$goal_label = $top_right_tag;
 $dimensions4 = imagettfbbox(13, 0, $font_semi, $goal_label);
 $textWidth4 = abs($dimensions4[4] - $dimensions4[0]);
 $x4 = imagesx($image) - $textWidth4;
@@ -105,7 +110,7 @@ imagettftext($image, 22, 0, ($x - 17), 55, $primary, $font_bold, $goal);
 // Contributions
 if ($show_contributions==='true') {
     // label
-    $contributions_label = 'SIGNATURES';
+    $contributions_label = $bottom_left_tag;
     imagettftext($image, 10, 0, 15, 160, $label, $font_semi, $contributions_label);
     // value
     $contributions = number_format($contributions_src);

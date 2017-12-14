@@ -3,7 +3,7 @@
 ## URL Queries
 String as many of these together as needed, they all have a default  
 **Example:**  
-https://www.lewj.ninja/prog/therm.php?contributed=21321312&goal=52000000&contributions=123&datestr=1508167978&showperc=false&showdate=false&showcontributions=false&halfsize=true
+https://www.lewj.ninja/prog/therm.php?contributed=21321312&goal=52000000&contributions=123&datestr=1508167978&showperc=false&showdate=false&showcontributions=false&halfsize=true&top_left=TEST%20LABEL
 
 ### Data Queries
 
@@ -96,3 +96,21 @@ _Note: only works on therm.php_
 **Default:** `ffffff`  
 **Desc:** Sets colour of the background
 _Note: to use this set transbg to false_
+
+### Label Text
+_for two words you may need to add `%20` instead of the space ie. `?top_left=TEST%20LABEL`_
+
+`?top_left=`  
+**Type:** String (eg. `SIGNATURES`)  
+**Default:** `SIGNATURES` _dependant on which thermometer you use_
+**Desc:** Sets text of top left label
+
+`?top_right=`  
+**Type:** String (eg. `GOAL`)  
+**Default:** `GOAL` _dependant on which thermometer you use_
+**Desc:** Sets text of top right label
+
+`?bottom_left=`  
+**Type:** String (eg. `CONTRIBUTIONS`)  
+**Default:** `CONTRIBUTIONS` _dependant on which thermometer you use_
+**Desc:** Sets text of bottom left label
