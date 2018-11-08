@@ -3,7 +3,7 @@
 ## URL Queries
 String as many of these together as needed, they all have a default  
 **Example:**  
-https://email-thermometer.appspot.com/?contributed=21321312&goal=52000000&contributions=123&datestr=1508167978&showperc=false&showdate=false&showcontributions=false&halfsize=true&top_left=TEST%20LABEL
+https://thermometer.forwardaction.uk/?contributed=21321312&goal=52000000&contributions=123&datestr=1508167978&showperc=false&showdate=false&showcontributions=false&halfsize=true&top_left=TEST%20LABEL
 
 ### Data Queries
 
