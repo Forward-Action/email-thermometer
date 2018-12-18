@@ -49,6 +49,7 @@ if (isset($_GET['currency'])) {
         case 'USD':
         case 'AUD':
         case 'CAD':
+        case 'NZD':
             $currency = '$';
             break;
         default:
