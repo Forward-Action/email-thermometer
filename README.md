@@ -27,6 +27,10 @@ https://thermometer.forwardaction.uk/?contributed=21321312&goal=52000000&contrib
 **Type:** Unformatted Number (eg. `1248258`)  
 **Desc:** The amount of contributions made
 
+`?perc=`  
+**Type:** Unformatted Number (eg. `1248258`)  
+**Desc:** This overwrites any other bar position calculation and shows the percentage given.
+
 ### Display Queries
 
 `?showperc=`  
@@ -72,6 +76,12 @@ _Note: only works on monthly.php_
 **Type:** Boolean (eg. `true`)  
 **Default:** `true`  
 **Desc:** Sets whether you want to display contributed on therm.php
+_Note: only works on therm.php_
+
+`?showgoal=`  
+**Type:** Boolean (eg. `true`)  
+**Default:** `true`  
+**Desc:** Sets whether you want to display the goal on therm.php
 _Note: only works on therm.php_
 
 `?currency=`  
